@@ -1,31 +1,23 @@
 const Koa = require('koa');
-
-// 注意require('koa-router')返回的是函数:
 const router = require('koa-router')();
 const bodyParser = require('koa-bodyparser');
 const app = new Koa();
 const  cors = require('koa2-cors');
+const homeRouter = require('./routers/index')
+const timeRouter = require('./routers/index')
+const errorRouter = require('./routers/error')
 
 app.use(bodyParser());
 app.use(cors());
-// log request URL:
-app.use(async (ctx, next) => {
-  console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
-  await next();
-});
 
-// add url-route:
+
 router.get('/api/hello', async (ctx, next) => {
-  console.log('------------------------------------');
-  console.log("AA");
-  console.log('------------------------------------');
   var name = ctx.params.name;
   ctx.response.body = 1111
 });
-
-router.get('/', async (ctx, next) => {
-  ctx.response.body = '<h1>Index</h1>';
-});
+router.use('/', homeRouter.routes(), homeRouter.allowedMethods())
+router.use('/error', errorRouter.routes(), errorRouter.allowedMethods())
+router.use('/time', timeRouter.routes(), timeRouter.allowedMethods())
 
 // add router middleware:
 app.use(router.routes());

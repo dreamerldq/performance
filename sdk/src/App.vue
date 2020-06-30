@@ -1,43 +1,43 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <img
-      src="http://localhost:8888/img.png"
-    />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <el-menu
+      :default-active="activeIndex"
+      class="el-menu-demo"
+      mode="horizontal"
+      @select="handleSelect"
+    >
+      <el-menu-item index="index">测试首页</el-menu-item>
+      <el-menu-item index="error">错误中心</el-menu-item>
+      <el-menu-item index="time">性能分析</el-menu-item>
+    </el-menu>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 /*eslint-disable*/
-import request from './utils/request'
-import "./monitoring/error.js";
-
+import request from "./utils/request";
+import HeavyShower from "./monitoring/error";
 import HelloWorld from "./components/HelloWorld.vue";
-// const a = 10;
-// a = 200;
+window.heavy = new HeavyShower("http://localhost:8888");
+
 export default {
   name: "App",
-  components: {
-    HelloWorld
+  data() {
+    return {
+      activeIndex:"index"
+    }
   },
-  mounted() {
-  //  const p1 =  new Promise((resolve, reject) => {
-  //    reject('error')
-  //   })
-  // request.get('/api/hello')
-  },
+  mounted() {},
+  methods: {
+       handleSelect(key, keyPath) {
+        console.log(key);
+        this.$router.push(`/${key}`)
 
+      }
+  },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

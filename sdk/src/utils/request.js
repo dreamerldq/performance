@@ -5,7 +5,10 @@ const instance = axios.create({
 
 instance.interceptors.response.use(
   function(response) {
-    return response;
+    if(response.status === 200){
+      return response.data;
+    }
+    
   },
   function(error) {
     console.log("上报错误信息", error);
