@@ -4,5 +4,5 @@ const errorController = require('../controller/error')
 
 
 error.get('/getAll', errorController.getAllErrors)
-
+error.get('/getPage', errorController.getPageErrors)
 module.exports = error

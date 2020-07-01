@@ -8,7 +8,6 @@
     >
       <el-menu-item index="index">测试首页</el-menu-item>
       <el-menu-item index="error">错误中心</el-menu-item>
-      <el-menu-item index="time">性能分析</el-menu-item>
     </el-menu>
     <router-view></router-view>
   </div>
@@ -28,7 +27,10 @@ export default {
       activeIndex:"index"
     }
   },
-  mounted() {},
+  mounted() {
+    const {pathname} = window.location
+    this.activeIndex = pathname.split('/')[1]
+  },
   methods: {
        handleSelect(key, keyPath) {
         console.log(key);
