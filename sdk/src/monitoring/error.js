@@ -1,4 +1,5 @@
 
+/*eslint-disable*/
 const ERROR_RUNTIME = 1
 const ERROR_SCRIPT = 2
 const ERROR_STYLE = 3
@@ -13,6 +14,7 @@ const LOAD_ERROR_TYPE = {
   AUDIO: ERROR_AUDIO,
   VIDEO: ERROR_VIDEO
 };
+
 window.addEventListener("error", event => {
   const errorTarget = event.target
   // 捕获的错误有两种情况，一种是script执行的错误，一种是资源加载的错误。通过errorTarget来判断
@@ -28,7 +30,7 @@ window.addEventListener("error", event => {
 window.addEventListener("unhandledrejection", function (event) {
   handleError({
     type: ERROR_PROMISE,
-    desc: event.reason.message,
+    desc: event.reason,
     position: 'position',
   });
 }, true);
@@ -56,13 +58,7 @@ function formatLoadError(errorTarget) {
 window.addEventListener('load', function () {
   setTimeout(function () {
     const time = window.heavy.getTimes();
-    console.log('------------------------------------');
-    console.log("TIME", time);
-    console.log('------------------------------------');
     window.heavy.sendTime(time)
-    // var data = handleNumber({ ajaxs: pineapple.ajaxs, dpi: pineapple.dpi(), time: time, network: pineapple.network() });
-    // console.log("data", data);
-    // window.heavy.send(data);
   }, 500);
 });
 
@@ -134,3 +130,5 @@ class HeavyShower {
   }
 }
 export default HeavyShower
+
+export {handleError, formatRuntimerError}

@@ -16,9 +16,8 @@
 <script>
 /*eslint-disable*/
 import request from "./utils/request";
-import HeavyShower from "./monitoring/error";
 import HelloWorld from "./components/HelloWorld.vue";
-window.heavy = new HeavyShower("http://localhost:8888");
+
 
 export default {
   name: "App",
@@ -43,3 +42,6 @@ export default {
 
 <style>
 </style>
+
+
+

@@ -45,16 +45,10 @@ export default {
           }
         })
         .then(({ data }) => {
-          // this.list = data.list;
-          console.log("------------------------------------");
-          console.log("AAA", data);
-          console.log("------------------------------------");
           this.errors = data.errors
           this.avgTime = data.avgTime[0]
           this.url = data.url
-          console.log('------------------------------------');
-          console.log("aqAA", this.avgTime);
-          console.log('------------------------------------');
+          
           const rows = Object.keys(this.avgTime).map((item) => {
             return{
               timeType: item,

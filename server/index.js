@@ -22,6 +22,5 @@ router.use('/time', timeRouter.routes(), timeRouter.allowedMethods())
 // add router middleware:
 app.use(router.routes());
 
-// 在端口3000监听:
 app.listen(8888);
 console.log('app started at port 8888...');
